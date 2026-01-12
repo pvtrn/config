@@ -20,6 +20,16 @@ git clone https://github.com/pvtrn/config.git /tmp/config && cp -r /tmp/config/.
 - `Ctrl+A` — префикс (вместо стандартного `Ctrl+B`)
 - `Alt+←/→` — переключение между табами
 
+## Если что-то не работает
+
+Очистить кэш neovim и пересинхронизировать плагины:
+
+```bash
+rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
+```
+
+Затем открыть nvim и выполнить `:Lazy sync`
+
 ## Рекомендация
 
 Перебиндить Caps Lock на Ctrl — так удобнее нажимать хоткеи:
