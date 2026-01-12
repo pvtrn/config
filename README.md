@@ -25,10 +25,10 @@ git clone https://github.com/pvtrn/config.git /tmp/config && cp -r /tmp/config/.
 Очистить кэш neovim и пересинхронизировать плагины:
 
 ```bash
-rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
+rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim && nvim
 ```
 
-Затем открыть nvim и выполнить `:Lazy sync`
+После запуска выполнить `:Lazy sync`
 
 ## Рекомендация
 
