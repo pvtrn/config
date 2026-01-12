@@ -4,6 +4,13 @@
 
 ![example](example.png)
 
+## Установка зависимостей
+
+```bash
+# Ubuntu/Debian
+sudo apt install neovim tmux
+```
+
 ## Быстрая установка
 
 ```bash
@@ -39,4 +46,11 @@ rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim && nvim
 setxkbmap -option ctrl:nocaps
 
 # Для Wayland добавить в конфиг композитора
+```
+
+## Запуск
+
+```bash
+tmux
+nvim
 ```
