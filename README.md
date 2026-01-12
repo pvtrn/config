@@ -7,8 +7,8 @@
 ## Установка зависимостей
 
 ```bash
-# Ubuntu/Debian
-sudo apt install neovim tmux
+# Ubuntu/Debian - последняя версия Neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install neovim tmux -y
 ```
 
 ## Быстрая установка
