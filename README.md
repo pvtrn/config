@@ -41,13 +41,13 @@ rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim && nvim
 
 После запуска выполнить `:Lazy sync`
 
-## Рекомендация
-
-Перебиндить Caps Lock на Ctrl — так удобнее нажимать хоткеи:
-
 ## Как пользоваться Claude Code
 
 [https://github.com/anthropics/claude-code](https://github.com/anthropics/claude-code)
+
+## Рекомендация
+
+Перебиндить Caps Lock на Ctrl — так удобнее нажимать хоткеи:
 
 ```bash
 # Linux (X11)
