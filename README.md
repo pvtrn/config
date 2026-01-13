@@ -8,7 +8,11 @@
 
 ```bash
 # Ubuntu/Debian - последняя версия Neovim
-sudo add-apt-repository ppa:neovim-ppa/unstable -y && sudo apt update && sudo apt install neovim tmux -y
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update
+sudo apt install neovim tmux -y
+# Последняя версия Claude
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 ## Быстрая установка
