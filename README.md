@@ -45,6 +45,10 @@ rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim && nvim
 
 Перебиндить Caps Lock на Ctrl — так удобнее нажимать хоткеи:
 
+## Как пользоваться Claude Code
+
+[https://github.com/anthropics/claude-code](https://github.com/anthropics/claude-code)
+
 ```bash
 # Linux (X11)
 setxkbmap -option ctrl:nocaps
@@ -58,7 +62,4 @@ setxkbmap -option ctrl:nocaps
 tmux
 nvim
 
-## Как пользоватся Claude Code
-
-[https://github.com/anthropics/claude-code](https://github.com/anthropics/claude-code)
 ```
