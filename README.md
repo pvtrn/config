@@ -11,8 +11,8 @@
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
 sudo apt install neovim tmux -y
-# Последняя версия Claude
-curl -fsSL https://claude.ai/install.sh | bash
+# Claude Code - https://github.com/anthropics/claude-code
+npm install -g @anthropic-ai/claude-code
 ```
 
 ## Быстрая установка
