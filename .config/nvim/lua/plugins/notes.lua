@@ -43,34 +43,92 @@ return {
         end,
         desc = "Previous todo comment",
       },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo comments" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>",                         desc = "Todo comments" },
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
   },
 
-  -- Mind mapping и заметки
+  -- Org-mode для заметок и задач
   {
-    "phaazon/mind.nvim",
-    branch = "v2.2",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "nvim-orgmode/orgmode",
     event = "VeryLazy",
-    opts = {
-      persistence = {
-        state_path = vim.fn.stdpath("data") .. "/mind.nvim/mind.json",
-        data_dir = vim.fn.stdpath("data") .. "/mind.nvim/data",
-      },
-      edit = {
-        data_extension = ".md",
-        data_header = "# %s",
-      },
-      ui = {
-        width = 30,
-        border = "rounded",
-      },
-    },
+    ft = { "org" },
+    config = function()
+      require("orgmode").setup({
+        org_agenda_files = { "./.org/**/*", "./**.org" },
+        org_default_notes_file = "./.org/plan.org",
+        org_todo_keywords = { "BACKLOG", "TODO", "IN-PROGRESS", "REVIEW", "TESTING", "|", "DONE", "CANCELLED" },
+        win_split_mode = "horizontal", -- Исправляет конфликт с nui.nvim
+        org_capture_templates = {
+          t = { description = "Task", template = "* TODO %?\n  %u", target = "./.org/todo.org" },
+          n = { description = "Note", template = "* %?\n  %u", target = "./.org/notes.org" },
+          b = { description = "Backlog", template = "* BACKLOG %? :backlog:\n  %u", target = "./.org/backlog.org" },
+        },
+        mappings = {
+          org = {
+            org_toggle_checkbox = '<leader>ox',
+            org_todo = '<leader>ot',
+          },
+        },
+      })
+
+      -- Обновляем snacks explorer после записи org файлов
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = "*.org",
+        callback = function()
+          vim.defer_fn(function()
+            -- Симулируем нажатие 'u' в explorer для обновления
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+              local buf = vim.api.nvim_win_get_buf(win)
+              local ft = vim.bo[buf].filetype
+              if ft == "snacks_picker_list" then
+                local current_win = vim.api.nvim_get_current_win()
+                vim.api.nvim_set_current_win(win)
+                vim.cmd("normal u")
+                vim.api.nvim_set_current_win(current_win)
+                break
+              end
+            end
+          end, 200)
+        end,
+      })
+    end,
     keys = {
-      { "<leader>mo", "<cmd>MindOpenMain<cr>", desc = "Open main mind" },
-      { "<leader>mc", "<cmd>MindClose<cr>", desc = "Close mind" },
+      { "<leader>oa", "<cmd>lua require('orgmode').action('agenda.prompt')<cr>",                desc = "Org Agenda" },
+      { "<leader>oc", "<cmd>lua require('orgmode').action('capture.prompt')<cr>",               desc = "Org Capture" },
+      { "<leader>ox", "<cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<cr>", desc = "Toggle checkbox",  ft = "org" },
+      { "<leader>ot", "<cmd>lua require('orgmode').action('org_mappings.todo_next_state')<cr>", desc = "Cycle TODO state", ft = "org" },
+    },
+  },
+
+  -- Zettelkasten заметки с zk-nvim
+  {
+    "zk-org/zk-nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    event = "VeryLazy",
+    config = function()
+      require("zk").setup({
+        picker = "telescope",
+        lsp = {
+          config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+          },
+          auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+          },
+        },
+      })
+    end,
+    keys = {
+      { "<leader>zn", "<cmd>ZkNew { title = vim.fn.input('Title: ') }<cr>",                               desc = "New note" },
+      { "<leader>zo", "<cmd>ZkNotes { sort = { 'modified' } }<cr>",                                       desc = "Open notes" },
+      { "<leader>zt", "<cmd>ZkTags<cr>",                                                                  desc = "Open by tag" },
+      { "<leader>zf", "<cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<cr>", desc = "Find notes" },
+      { "<leader>zl", "<cmd>ZkLinks<cr>",                                                                 desc = "Show links" },
+      { "<leader>zb", "<cmd>ZkBacklinks<cr>",                                                             desc = "Show backlinks" },
+      { "<leader>zi", "<cmd>ZkInsertLink<cr>",                                                            desc = "Insert link",   mode = { "n", "v" } },
     },
   },
 }

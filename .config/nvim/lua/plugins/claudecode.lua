@@ -1,25 +1,24 @@
 -- Claude Code Neovim integration
--- Default minimal configuration from official repository
+-- Using local fork with tmux provider support
 return {
-  "coder/claudecode.nvim",
+  dir = "~/claudecode-tmux.nvim",
+  name = "claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
-
   opts = {
-    -- Custom terminal command with --continue flag
-    -- terminal_cmd = "codex",
-    -- Auto-focus Claude terminal after sending selection
+    -- log_level = "debug",
     focus_after_send = true,
-
+    terminal = {
+      provider = "tmux",
+      split_side = "right",
+      split_width_percentage = 0.35,
+    },
     diff_opts = {
-      auto_close_on_accept = true, -- close diff windows after accepting
-      vertical_split = true, -- use vertical splits for diffs
-      open_in_current_tab = false, -- don't create new tabs
-      keep_terminal_focus = true, -- keep focus on claude terminal
+      auto_close_on_accept = true,
+      vertical_split = true,
+      open_in_current_tab = false,
+      keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens
     },
   },
-
-  -- Key mappings
-  config = true,
   keys = {
     { "<leader>a", nil, desc = "AI/Claude Code" },
     { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },

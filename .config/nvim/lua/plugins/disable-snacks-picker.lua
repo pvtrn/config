@@ -8,6 +8,8 @@ return {
           explorer = {
             -- Показываем скрытые файлы
             hidden = true,
+            -- Отключаем watch чтобы избежать дублирования файлов
+            watch = true,
             -- Убираем инпут для фильтрации
             win = {
               input = {
@@ -21,8 +23,8 @@ return {
               preview = false,
               layout = {
                 backdrop = false,
-                width = 40,
-                min_width = 40,
+                width = 32,
+                min_width = 32,
                 height = 0,
                 position = "left",
                 border = "none",
