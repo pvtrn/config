@@ -18,6 +18,8 @@ return {
     opts = function()
       return {
         server = {
+          -- Use ra-multiplex for persistent rust-analyzer
+          cmd = { "ra-multiplex", "client" },
           default_settings = {
             ["rust-analyzer"] = {
               cargo = {
@@ -35,7 +37,13 @@ return {
               -- Ускорение индексации
               cachePriming = {
                 enable = true,
-                numThreads = 4, -- Больше потоков для быстрой индексации
+                numThreads = 0, -- 0 = автоматически выбрать (все ядра)
+              },
+              -- Больше потоков для общей работы
+              numThreads = 0, -- 0 = автоматически (все ядра)
+              -- Увеличенный LRU кэш для syntax trees
+              lru = {
+                capacity = 256, -- default 128
               },
               files = {
                 excludeDirs = {
