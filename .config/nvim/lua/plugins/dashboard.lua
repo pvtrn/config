@@ -2,7 +2,17 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
-      dashboard = { enabled = true },
+      dashboard = {
+        enabled = true,
+        preset = {
+          header = [[
+  ||     ||  
+ \\()// 
+//(__)\\
+||    ||
+]],
+        },
+      },
     },
   },
 }

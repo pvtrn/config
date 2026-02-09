@@ -44,3 +44,6 @@ vim.keymap.set("n", "<leader>x", function()
     vim.cmd("enew | bd! " .. buf)
   end
 end, { desc = "Close buffer (keep window)" })
+
+-- Toggle line wrap
+vim.keymap.set("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "Toggle word wrap" })
