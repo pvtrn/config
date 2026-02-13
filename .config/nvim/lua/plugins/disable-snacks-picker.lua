@@ -6,8 +6,9 @@ return {
       picker = {
         sources = {
           explorer = {
-            -- Показываем скрытые файлы
+            -- Показываем скрытые файлы и gitignored
             hidden = true,
+            ignored = true,
             -- Отключаем watch чтобы избежать дублирования файлов
             watch = true,
             -- Убираем инпут для фильтрации

@@ -4,8 +4,22 @@ return {
   dir = "~/claudecode-tmux.nvim",
   name = "claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
+  cmd = {
+    "ClaudeCode",
+    "ClaudeCodeFocus",
+    "ClaudeCodeSend",
+    "ClaudeCodeAdd",
+    "ClaudeCodeTreeAdd",
+    "ClaudeCodeDiffAccept",
+    "ClaudeCodeDiffDeny",
+    "ClaudeCodeSelectModel",
+  },
   opts = {
     -- log_level = "debug",
+    terminal_cmd = "ccb codex claude", -- launches Claude (anchor) + Codex via CCB
+    env = {
+      CCB_PANE_SPLIT = "bottom", -- Codex below Claude instead of side-by-side
+    },
     focus_after_send = true,
     terminal = {
       provider = "tmux",
